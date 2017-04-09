@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> names = new ArrayList<String>();
+    ArrayList<Integer> count = new ArrayList<Integer>();
 
     int offset = 0;
 
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new EndlessRecyclerViewAdapter(this,
                 recyclerView,
-                names);
+                names,
+                count);
 
         recyclerView.setAdapter(mAdapter);
 
@@ -54,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        loadDataOffset(offset);
-                        offset++;
+                        loadDataOffset();
 
                     }
                 }, 10);
@@ -65,24 +66,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loadDataOffset(offset);
+        loadDataOffset();
 
 
     }
 
-    void loadDataOffset(int _offset){
+    void loadDataOffset(){
 
+        int _offset = offset;
 
-        int i = _offset * 10;
-
-        Log.d("...",i + "");
-
-        if(i == 0){
-            i = 0;
-        }
-
-        for (int j = i ; j < (i + 10) ; j++ ){
+        for (int j = _offset ; j < (_offset + 10) ; j++ ){
             names.add("Name " + j);
+            count.add(j);
+            offset++;
             Log.d("...", j + "");
         }
 

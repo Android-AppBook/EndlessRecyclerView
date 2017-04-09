@@ -23,6 +23,8 @@ public class EndlessRecyclerViewAdapter extends RecyclerView.Adapter<EndlessRecy
 
     Context context;
     ArrayList<String> names = new ArrayList<String>();
+    ArrayList<Integer> count = new ArrayList<Integer>();
+
 
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
@@ -49,9 +51,11 @@ public class EndlessRecyclerViewAdapter extends RecyclerView.Adapter<EndlessRecy
 
     public EndlessRecyclerViewAdapter(Context context,
                                       RecyclerView recyclerView,
-                                      ArrayList<String> names) {
+                                      ArrayList<String> names,
+                                      ArrayList<Integer> count) {
         this.context = context;
         this.names = names;
+        this.count = count;
 
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
 
@@ -108,7 +112,7 @@ public class EndlessRecyclerViewAdapter extends RecyclerView.Adapter<EndlessRecy
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.mTextViewName.setText(names.get(position));
-        holder.mTextViewCount.setText(String.valueOf(position));
+        holder.mTextViewCount.setText(count.get(position) + "");
 
     }
 
